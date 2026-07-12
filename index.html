@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAYMENT RICH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #080711;
+      --bg-light: #f1f5f9;
+      --card-dark: rgba(17, 20, 43, 0.7);
+      --card-light: #ffffff;
+      --text-dark: #f8fafc;
+      --text-light: #0f172a;
+      --accent: #00f0ff; /* Ganti ke Cyan */
+      --rich-red: #ff0055; /* Warna baru untuk RICH */
+      --whatsapp: #25D366;
+      --telegram: #0088cc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 0, 85, 0.05) 0%, transparent 40%);
+    }
+
+    body.light {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      background-image: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 380px;
+      animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background-color: var(--card-dark);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 24px;
+      padding: 35px 25px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 240, 255, 0.15);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    body.light .card {
+      background-color: var(--card-light);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .top-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .avatar {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    select {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--text-dark);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    body.light select {
+      background-color: #fff;
+      color: var(--text-light);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: -50px;
+      right: 10px;
+    }
+
+    /* Memindahkan toggle ke pojok kanan atas card agar rapi */
+    .card .theme-toggle-inline {
+      display: inline-block;
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--accent);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body.light .theme-toggle-btn {
+      background: #eee;
+      border: none;
+      color: #555;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 20px 0 25px;
+      letter-spacing: -0.5px;
+    }
+
+    .highlight-rich {
+      color: var(--rich-red);
+      font-weight: 800;
+      text-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .pay-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-dark);
+      padding: 12px 10px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.light .pay-btn {
+      background: #f8fafc;
+      color: var(--text-light);
+      border: 1px solid #e2e8f0;
+    }
+
+    .pay-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 240, 255, 0.15);
+    }
+
+    body.light .pay-btn:hover {
+      color: #0284c7;
+      border-color: #0284c7;
+    }
+
+    .info-box {
+      font-size: 0.95rem;
+      margin-bottom: 25px;
+      min-height: 85px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    body.light .info-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .qris-img {
+      width: 160px;
+      margin-top: 12px;
+      border-radius: 12px;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .note {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    body.light .note {
+      color: #64748b;
+    }
+
+    /* --- SECTION TOMBOL KONTAK (MEMBULAT 100% MODEREN) --- */
+    .contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 50px; /* 100% Bulat Lonjong Sempurna */
+      text-decoration: none;
+      font-weight: 700;
+      color: #fff;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-button i {
+      font-size: 1.3rem;
+    }
+
+    .btn-telegram {
+      background: var(--telegram);
+    }
+    .btn-telegram:hover {
+      background: #0077b3;
+      box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+    }
+    .btn-whatsapp:hover {
+      background: #1ebe5d;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .copy-btn, .download-btn {
+      margin-top: 12px;
+      background-color: var(--accent);
+      color: #080711;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .copy-btn:hover, .download-btn:hover {
+      background-color: #00d3aa;
+    }
+
+    /* Efek Klik Ripple */
+    .ripple {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: rippleEffect 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes rippleEffect {
+      to { transform: scale(4); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <div class="top-section">
+        <img src="https://files.catbox.moe/pivart.jpg" class="avatar" alt="Rich Avatar" />
+        
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="theme-toggle-btn" onclick="toggleTheme()" title="Ganti Tema">
+            <i class="fas fa-moon"></i>
+          </button>
+          
+          <select id="language" onchange="setLanguage()">
+            <option value="id">🇮🇩 Indo</option>
+            <option value="en">🇬🇧 Eng</option>
+            <option value="ru">🇷🇺 Rus</option>
+            <option value="jp">🇯🇵 Jap</option>
+          </select>
+        </div>
+      </div>
+
+      <h1 id="title">Payment <span class="highlight-rich">RICH</span></h1>
+
+      <div class="buttons">
+        <button class="pay-btn" onclick="showInfo('dana')">DANA</button>
+        <button class="pay-btn" onclick="showInfo('gopay')">GoPay</button>
+        <button class="pay-btn" onclick="showInfo('qris')">QRIS</button>
+      </div>
+
+      <div id="payment-info" class="info-box">
+        <p id="select-text">Pilih metode pembayaran di atas.</p>
+      </div>
+
+      <p class="note" id="note-text">
+        Setelah transfer, mohon kirimkan bukti pembayaran kepada <span class="highlight-rich">RICH</span> melalui Telegram atau WhatsApp.
+      </p>
+
+      <div class="contact-wrapper">
+        <a href="https://t.me/XRICHOFFC" class="contact-button btn-telegram" id="telegram-btn" target="_blank">
+          <i class="fab fa-telegram-plane"></i>
+          <span id="text-tele">Hubungi Telegram</span>
+        </a>
+        
+        <a href="https://wa.me/6283114400242" class="contact-button btn-whatsapp" id="whatsapp-btn" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          <span id="text-wa">Hubungi WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Penambahan Data Bahasa (Rusia & Jepang)
+    const languageData = {
+      id: {
+        select: "Pilih metode pembayaran di atas.",
+        dana: "DANA:<br>083114400242<br>A/n NANDO",
+        gopay: "GoPay:<br>-<br>A/n -",
+        copy: "Salin Nomor",
+        copied: "Disalin!",
+        note: "Setelah transfer, mohon kirimkan bukti pembayaran kepada <span class='highlight-rich'>RICH</span> melalui Telegram atau WhatsApp.",
+        tele: "Hubungi Telegram",
+        wa: "Hubungi WhatsApp",
+        download: "Unduh QRIS"
+      },
+      en: {
+        select: "Select a payment method above.",
+        dana: "DANA:<br>083114400242<br>Acc: NANDO",
+        gopay: "GoPay:<br>-<br>Acc: -",
+        copy: "Copy Number",
+        copied: "Copied!",
+        note: "After transferring, please send the proof of payment to <span class='highlight-rich'>RICH</span> via Telegram or WhatsApp.",
+        tele: "Contact Telegram",
+        wa: "Contact WhatsApp",
+        download: "Download QRIS"
+      },
+      ru: {
+        select: "Выберите способ оплаты выше.",
+        dana: "DANA:<br>083114400242<br>Счет: NANDO",
+        gopay: "GoPay:<br>-<br>Счет: -",
+        copy: "Копировать номер",
+        copied: "Скопировано!",
+        note: "После перевода отправьте подтверждение оплаты <span class='highlight-rich'>RICH</span> через Telegram или WhatsApp.",
+        tele: "Связаться в Telegram",
+        wa: "Связаться в WhatsApp",
+        download: "Скачать QRIS"
+      },
+      jp: {
+        select: "上記の支払い方法を選択してください。",
+        dana: "DANA:<br>083114400242<br>名義: NANDO",
+        gopay: "GoPay:<br>-<br>名義: -",
+        copy: "番号をコピー",
+        copied: "コピー完了!",
+        note: "送金後、TelegramまたはWhatsAppを介して支払い証明を<span class='highlight-rich'>RICH</span>に送信してください。",
+        tele: "Telegramでお問い合わせ",
+        wa: "WhatsAppでお問い合わせ",
+        download: "QRISをダウンロード"
+      }
+    };
+
+    let currentLang = "id";
+    const qrisUrl = "https://files.catbox.moe/409cyy.jpg";
+
+    function showInfo(method) {
+      const infoBox = document.getElementById("payment-info");
+      let content = "";
+
+      if (method === "dana") {
+        content = `
+          <p><strong>${languageData[currentLang].dana}</strong></p>
+          <button class="copy-btn" onclick="copyText('083114400242')">${languageData[currentLang].copy}</button>
+        `;
+      } else if (method === "gopay") {
+        content = `
+          <p><strong>${languageData[currentLang].gopay}</strong></p>
+          <button class="copy-btn" onclick="copyText('-')">${languageData[currentLang].copy}</button>
+        `;
+      } else if (method === "qris") {
+        content = `
+          <p><img src="${qrisUrl}" alt="QRIS" class="qris-img" /><br>
+          <a href="${qrisUrl}" download="qris-rich.jpg" target="_blank">
+            <button class="download-btn">${languageData[currentLang].download}</button>
+          </a>
+          </p>
+        `;
+      }
+
+      infoBox.innerHTML = content;
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const buttons = document.querySelectorAll('.copy-btn');
+        buttons.forEach(btn => btn.innerText = languageData[currentLang].copied);
+        setTimeout(() => {
+          buttons.forEach(btn => btn.innerText = languageData[currentLang].copy);
+        }, 1500);
+      });
+    }
+
+    function setLanguage() {
+      currentLang = document.getElementById("language").value;
+      
+      // Update Text statis berdasarkan bahasa pilihan
+      document.getElementById("note-text").innerHTML = languageData[currentLang].note;
+      document.getElementById("text-tele").innerText = languageData[currentLang].tele;
+      document.getElementById("text-wa").innerText = languageData[currentLang].wa;
+      
+      // Mengembalikan info box ke default jika bahasa diubah
+      document.getElementById("payment-info").innerHTML = `<p id="select-text">${languageData[currentLang].select}</p>`;
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle("light");
+      
+      const icon = document.querySelector(".theme-toggle-btn i");
+      if(body.classList.contains("light")) {
+        icon.className = "fas fa-sun";
+      } else {
+        icon.className = "fas fa-moon";
+      }
+    }
+
+    // Efek Klik Riak (Ripple Effect)
+    const allBtns = document.querySelectorAll('.pay-btn, .contact-button');
+    allBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            let x = e.clientX - this.getBoundingClientRect().left;
+            let y = e.clientY - this.getBoundingClientRect().top;
+            let ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            this.appendChild(ripple);
+            setTimeout(() => { ripple.remove(); }, 600);
+        });
+    });
+
+    window.onload = () => {
+      document.querySelector(".container").style.opacity = "1";
+    };
+  </script>
+</body>
+</html>
